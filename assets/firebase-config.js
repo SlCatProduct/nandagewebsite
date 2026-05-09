@@ -1,10 +1,12 @@
 export const FIREBASE_CONFIG = {
-  apiKey: "PASTE_FIREBASE_API_KEY",
-  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_PROJECT_ID.firebasestorage.app",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID",
+  apiKey: "AIzaSyAx1i--9A63vQUum0B_q50nEkRkwaSq8Zw",
+  authDomain: "realtime-database-61159.firebaseapp.com",
+  databaseURL: "https://realtime-database-61159-default-rtdb.firebaseio.com",
+  projectId: "realtime-database-61159",
+  storageBucket: "realtime-database-61159.firebasestorage.app",
+  messagingSenderId: "994425521828",
+  appId: "1:994425521828:web:32b7c7dc9975393deac831",
+  measurementId: "G-LCD30QH2GR",
 };
 
 export const FIREBASE_COLLECTIONS = {
