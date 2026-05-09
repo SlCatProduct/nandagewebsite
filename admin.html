@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin | Nandage Home Store</title>
+    <meta name="robots" content="noindex" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/admin.css" />
+  </head>
+  <body class="admin-page">
+    <header class="admin-header">
+      <a class="brand" href="index.html" aria-label="Open storefront">
+        <span class="brand-mark">NH</span>
+        <span>Nandage Admin</span>
+      </a>
+      <div class="admin-header-actions">
+        <span class="admin-status" data-admin-status>Checking Firebase...</span>
+        <a class="ghost-button" href="index.html">Open Store</a>
+        <button class="ghost-button" type="button" data-sign-out hidden>Sign Out</button>
+      </div>
+    </header>
+
+    <main class="admin-shell">
+      <section class="setup-alert" data-setup-alert hidden>
+        <strong>Firebase config needed</strong>
+        <p>
+          Paste your Firebase web app config in <code>assets/firebase-config.js</code>, enable Email/Password Auth,
+          Firestore and Storage, then publish the included rules.
+        </p>
+      </section>
+
+      <section class="auth-panel" data-auth-panel>
+        <div>
+          <p class="section-kicker">Secure access</p>
+          <h1>Admin login</h1>
+          <p>
+            Sign in with the Firebase admin email. Product changes will save to Firestore and product images will upload
+            to Firebase Storage.
+          </p>
+        </div>
+
+        <form class="auth-form" data-auth-form>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" autocomplete="current-password" required />
+          </label>
+          <button class="primary-button" type="submit">Sign In</button>
+          <p class="form-note" data-auth-message></p>
+        </form>
+      </section>
+
+      <section class="admin-dashboard" data-dashboard hidden>
+        <div class="dashboard-heading">
+          <div>
+            <p class="section-kicker">Live Firebase catalog</p>
+            <h1>Products admin</h1>
+            <p data-admin-user></p>
+          </div>
+          <div class="dashboard-actions">
+            <button class="ghost-button" type="button" data-new-product>New Product</button>
+            <button class="ghost-button" type="button" data-seed-products>Seed Demo Products</button>
+            <button class="ghost-button" type="button" data-export-products>Export JSON</button>
+          </div>
+        </div>
+
+        <div class="stats-grid" aria-label="Catalog stats">
+          <div>
+            <span>Total</span>
+            <strong data-stat-total>0</strong>
+          </div>
+          <div>
+            <span>Active</span>
+            <strong data-stat-active>0</strong>
+          </div>
+          <div>
+            <span>Low Stock</span>
+            <strong data-stat-low>0</strong>
+          </div>
+          <div>
+            <span>Featured</span>
+            <strong data-stat-featured>0</strong>
+          </div>
+          <div>
+            <span>Pending Orders</span>
+            <strong data-stat-orders>0</strong>
+          </div>
+          <div>
+            <span>Pending Reviews</span>
+            <strong data-stat-reviews>0</strong>
+          </div>
+        </div>
+
+        <div class="admin-grid">
+          <form class="product-form" data-product-form>
+            <div class="form-title-row">
+              <div>
+                <h2 data-form-title>Add product</h2>
+                <p>Upload an image, fill product details and save directly to Firebase.</p>
+              </div>
+              <button class="ghost-button" type="button" data-reset-form>Reset</button>
+            </div>
+
+            <div class="image-uploader">
+              <div class="image-preview" data-image-preview>
+                <span>No image</span>
+              </div>
+              <label>
+                Product image
+                <input type="file" name="imageFile" accept="image/*" />
+              </label>
+              <label>
+                Or image URL
+                <input type="url" name="imageUrl" placeholder="https://..." />
+              </label>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Product name
+                <input name="name" required placeholder="Rice Cooker 1.8L" />
+              </label>
+              <label>
+                Product ID / slug
+                <input name="id" placeholder="rice-cooker-18l" />
+              </label>
+              <label>
+                Category
+                <input name="category" list="category-options" required placeholder="Kitchen & Dining" />
+                <datalist id="category-options" data-category-options></datalist>
+              </label>
+              <label>
+                Unit / pack
+                <input name="unit" required placeholder="1.8L / 12 Pcs / 1kg" />
+              </label>
+              <label>
+                Price
+                <input type="number" name="price" min="0" step="1" required />
+              </label>
+              <label>
+                Old price
+                <input type="number" name="oldPrice" min="0" step="1" />
+              </label>
+              <label>
+                Stock
+                <input type="number" name="stock" min="0" step="1" required />
+              </label>
+              <label>
+                Sort order
+                <input type="number" name="sortOrder" min="0" step="1" value="999" />
+              </label>
+              <label>
+                Badge text
+                <input name="reviews" placeholder="Best seller / In stock / New" />
+              </label>
+              <label>
+                Visual tone
+                <select name="tone">
+                  <option value="mint">Mint</option>
+                  <option value="sky">Sky</option>
+                  <option value="coral">Coral</option>
+                  <option value="amber">Amber</option>
+                  <option value="violet">Violet</option>
+                </select>
+              </label>
+              <label>
+                Status
+                <select name="status">
+                  <option value="active">Active</option>
+                  <option value="draft">Draft</option>
+                </select>
+              </label>
+              <label>
+                Short artwork title
+                <input name="monogram" placeholder="Rice Cooker" />
+              </label>
+            </div>
+
+            <label>
+              Description
+              <textarea name="description" rows="3" required></textarea>
+            </label>
+
+            <label>
+              Features
+              <textarea name="features" rows="4" placeholder="One feature per line"></textarea>
+            </label>
+
+            <div class="switch-row">
+              <label class="switch">
+                <input type="checkbox" name="featured" />
+                <span>Featured deal</span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit" data-save-product>Save Product</button>
+              <button class="ghost-button" type="button" data-duplicate-product disabled>Duplicate</button>
+            </div>
+            <p class="form-note" data-form-message></p>
+          </form>
+
+          <section class="product-manager">
+            <div class="manager-toolbar">
+              <label class="search-box">
+                <span>Search</span>
+                <input type="search" placeholder="Search products..." data-admin-search />
+              </label>
+              <select data-status-filter aria-label="Filter by status">
+                <option value="all">All status</option>
+                <option value="active">Active</option>
+                <option value="draft">Draft</option>
+              </select>
+            </div>
+
+            <div class="admin-product-list" data-admin-products></div>
+          </section>
+        </div>
+
+        <div class="operations-grid">
+          <section class="operation-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Order Management</h2>
+                <p>Track pending, confirmed, delivered and cancelled customer orders.</p>
+              </div>
+              <select data-order-filter aria-label="Filter orders">
+                <option value="all">All orders</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="order-list" data-order-list></div>
+          </section>
+
+          <section class="operation-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Stock Alerts</h2>
+                <p>Products with 2 or fewer items in stock.</p>
+              </div>
+            </div>
+            <div class="stock-alert-list" data-stock-alerts></div>
+          </section>
+
+          <section class="operation-panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Customer Reviews</h2>
+                <p>Approve useful reviews before they appear on the store.</p>
+              </div>
+              <select data-review-filter aria-label="Filter reviews">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="all">All reviews</option>
+              </select>
+            </div>
+            <div class="review-admin-list" data-review-list></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" data-toast hidden></div>
+
+    <script type="module" src="assets/admin.js"></script>
+  </body>
+</html>
